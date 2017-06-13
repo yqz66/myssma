@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       ">
+    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="cn.bdqn.tangcco">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--加载properties文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--配置数据源链接池-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--配置mybatis的整合-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="typeAliasesPackage" value="cn.bdqn.tangcco.entity"></property>
+         <!--指定Mapper文件在什么路径-->
+        <property name="mapperLocations" value="classpath:cn/bdqn/tangcco/mapper/*.xml"></property>
+    </bean>
+    <!--配置扫描器,将mybatis接口的实现加入到IOC容器中-->
+    <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描所有Dao接口的-->
+        <property name="basePackage" value="cn.bdqn.tangcco.*.dao"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--配置事务控制-->
+    <tx:advice id="txAdvices" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="txPointCut" expression="execution(* cn.bdqn.tangcco.*.services.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvices" pointcut-ref="txPointCut"/>
+    </aop:config>
+    <bean id="pageResult" class="cn.bdqn.tangcco.entity.PageResult">
+        <property name="pageSize" value="4"></property>
+        <property name="pageNumber" value="1"></property>
+    </bean>
+</beans>

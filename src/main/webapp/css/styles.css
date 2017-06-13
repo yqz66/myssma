@@ -1,0 +1,160 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #666666;
+	background: #fff;
+	text-align: center;
+	text-align: center;
+	background: #4f3722 url('../images/darkcurtainB.jpg') repeat-x;
+}
+
+img {
+	border: none;
+}
+
+p {
+	margin-bottom: 10px;
+	color: #FFFFFF;
+}
+
+.leftcurtain {
+	width: 50%;
+	height: 495px;
+	top: 0px;
+	left: 0px;
+	position: absolute;
+	z-index: 2;
+}
+
+.rightcurtain {
+	width: 51%;
+	height: 495px;
+	right: 0px;
+	top: 0px;
+	position: absolute;
+	z-index: 3;
+}
+
+.rightcurtain img,.leftcurtain img {
+	width: 100%;
+	height: 100%;
+}
+
+.logo {
+	margin-left: 1%;
+	margin-top: 180px;
+}
+
+.rope {
+	position: absolute;
+	top: -40px;
+	left: 70%;
+	z-index: 4;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: #1E7ACE;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+h3 {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+pre,p {
+	color: #1E7ACE;
+	margin: 4px;
+}
+
+input,select,textarea {
+	padding: 1px;
+	margin: 2px;
+	font-size: 11px;
+}
+
+.buttom {
+	padding: 1px 10px;
+	font-size: 12px;
+	border: 1px #1E7ACE solid;
+	background: #D0F0FF;
+}
+
+#formwrapper {
+	width: 450px;
+	margin: 15px auto;
+	padding: 20px;
+	text-align: left;
+	border: 1px solid #A4CDF2;
+}
+
+fieldset {
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px solid #A4CDF2;
+	background: #fff;
+}
+
+fieldset legend {
+	color: #1E7ACE;
+	font-weight: bold;
+	padding: 3px 20px 3px 20px;
+	border: 1px solid #A4CDF2;
+	background: #fff;
+}
+
+fieldset label {
+	float: left;
+	width: 120px;
+	text-align: right;
+	padding: 4px;
+	margin: 1px;
+}
+
+fieldset div {
+	clear: left;
+	margin-bottom: 2px;
+}
+
+.enter {
+	text-align: center;
+}
+
+.clear {
+	clear: both;
+}
+.username {
+	border: 1px solid #f00;
+	background-color: #fcc;
+	font-size:20px;
+	width: 150px;
+	height:30px
+	
+	
+}
+#ajaxLoginFromJSON{
+	display:none;
+	position:absolute;
+	width: 80px;
+	height:25px;
+	background-color: yellow;
+	text-align: center;
+	padding-top: 5px;
+	font-size:13px;
+	border: solid 1px red;
+}

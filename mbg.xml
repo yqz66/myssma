@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--配置jdbc配置源-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!--把他设置为true 是让它不再自动生成注释-->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/tangcco"
+                        userId="root"
+                        password="admin">
+        </jdbcConnection>
+        <!--Java解析类型，我们不用管-->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!--javaBean模型生成--> <!-- 你要把Bean生成在哪个包下--> <!-- 你要在哪个工程下生成.\src代表生成在本工程下-->
+        <javaModelGenerator targetPackage="cn.bdqn.tangcco.entity" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--指定sqlXML生成映射文件的位置-->
+        <sqlMapGenerator targetPackage="cn.bdqn.tangcco.mapper"  targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!--指定Dao接口生成位置,Mapper接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.bdqn.tangcco.user.dao"  targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <!--table元素表示每个表的生成策略-->
+        <!--生成表的名称             Bean名称一定要大写    对应的JavaBean的名称-->
+        <!--<table tableName="tbuser" domainObjectName="Tbuser"></table>-->
+        <table tableName="tbuser" domainObjectName="Tbuser"></table>
+        <!--<table tableName="student" domainObjectName="Student"></table>-->
+        <!--<table tableName="grade" domainObjectName="Grade"></table>-->
+        <!--<table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey column="ID" sqlStatement="DB2" identity="true" />-->
+            <!--<columnOverride column="DATE_FIELD" property="startDate" />-->
+            <!--<ignoreColumn column="FRED" />-->
+            <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+    </context>
+</generatorConfiguration>
