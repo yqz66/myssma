@@ -13,8 +13,9 @@ public interface UserServices {
     public Tbuser login(Tbuser tbuser);
     public int queryCount(Tbuser tbuser);
     public int addTbuser(Tbuser tbuser);
-
     void deleteUser(int userid);
-
     void deleteByUserIds(List<Integer> list);
+    Tbuser queryTbuserById(Integer userid);
+
+    int updateTbuserById(Tbuser tbuser);
 }

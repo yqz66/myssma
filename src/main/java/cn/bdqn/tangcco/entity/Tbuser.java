@@ -23,6 +23,9 @@ public class Tbuser {
     private String gender;
     private Roles roles;
 
+    public Tbuser() {
+    }
+
     @Override
     public String toString() {
         return "Tbuser{" +
@@ -37,6 +40,10 @@ public class Tbuser {
                 ", gender='" + gender + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public Tbuser(String username) {
+        this.username = username;
     }
 
     public Roles getRoles() {

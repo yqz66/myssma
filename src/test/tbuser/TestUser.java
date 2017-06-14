@@ -1,6 +1,7 @@
 package tbuser;
 
 import cn.bdqn.tangcco.command.util.Util;
+import cn.bdqn.tangcco.entity.Msg;
 import cn.bdqn.tangcco.entity.PageResult;
 import cn.bdqn.tangcco.entity.Roles;
 import cn.bdqn.tangcco.entity.Tbuser;
@@ -58,5 +59,23 @@ public class TestUser {
         tbuser.setUsername("admin");
         tbuser.setPassword("123");
         System.out.println(userServices.login(tbuser));
+    }
+    @Test
+    public void testAddUser(){
+       /* Tbuser tbuser = new Tbuser();
+        Date utliDate = new Date();
+        Timestamp timestamp = new Timestamp(utliDate.getTime());
+        tbuser.setSystemtime(timestamp);
+        tbuser.setRegistrationtime(timestamp);
+        int i = userServices.addTbuser(tbuser);
+        System.out.println(i);*/
+        System.out.println(Msg.success(null));
+    }
+    @Test
+    public void testUpdateUserByKey(){
+        Tbuser tbuser = new Tbuser();
+        tbuser.setUserid(36);
+        tbuser.setUsername("确定修改成功");
+        System.out.println(userServices.updateTbuserById(tbuser));
     }
 }

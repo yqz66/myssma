@@ -30,6 +30,16 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
+    public Tbuser queryTbuserById(Integer userid) {
+        return tbuserMapper.selectByPrimaryKey(userid);
+    }
+
+    @Override
+    public int updateTbuserById(Tbuser tbuser) {
+        return tbuserMapper.updateByPrimaryKeySelective(tbuser);
+    }
+
+    @Override
     public void deleteUser(int userid) {
         tbuserMapper.deleteByPrimaryKey(userid);
     }
