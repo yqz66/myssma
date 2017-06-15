@@ -108,6 +108,9 @@
       AND username like concat('%',#{username},'%')
     </if>
   </select>
+  <select id="queryUserByUserName" parameterType="cn.bdqn.tangcco.entity.Tbuser" resultMap="BaseResultMap">
+    SELECT * from tbuser where username=#{username}
+  </select>
   <select id="login" parameterType="cn.bdqn.tangcco.entity.Tbuser" resultMap="BaseResultMap">
     SELECT * FROM tbuser WHERE username=#{username} and password=#{password}
   </select>

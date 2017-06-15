@@ -7,25 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
-%>
 <html>
 <head>
     <title>用户列表</title>
-    <script type="text/javascript" src="<%=path%>/js/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/static/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <script type="text/javascript" src="<%=path%>/static/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $.ajax({
             url: "/querymenus.controller",
             type :"GET",
             success :function (result) {
                 $.each(result,function (index,itmes) {
-                    $('#titles').append("<li class='s'><a href='"+itmes.menus.url+"' target='right'><h4>"+itmes.menus.menusname+"</h4></a></li>");
+                    $('#titles').append("<li class='s'><a href='"+itmes.menus.url+"' target='_top'><h4>"+itmes.menus.menusname+"</h4></a></li>");
 //                    $('#titles').append("<li role='presentation' class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='"+itmes.menus.url+"?page.pageNumber=1' role='button' aria-haspopup='true' aria-expanded='false'><h4>"+itmes.menus.menusname+"</h2></a></li>");
                 });
                 $('#titles').append("<li role='presentation' class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'><h4>更多<span class ='caret'></span></h4></a><ul class='dropdown-menu'><li>重新登录</li></ul></li>");
@@ -35,6 +29,13 @@
                 alert("错误");
             }
         })
+        $(function() {
+            $(".table tr").hover(function () {
+                $(this).addClass("success");
+            }, function () {
+                $(this).removeClass("success");
+            });
+        });
     </script>
 </head>
 <body style="padding-top: 70px;">
@@ -170,47 +171,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<ul class="nav nav-tabs navbar-fixed-top" id="titles">
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        </a>
-    </li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        </a>
-    </li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        </a>
-    </li> <li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-    </a>
-</li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        </a>
-    </li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        </a>
-    </li>
-    <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        </a>
-    </li><li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-    </a>
-</li><li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-    </a>
-</li><li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-    </a>
-</li>
-
-
-
+<ul class="nav nav-tabs navbar-fixed-top" id="titles" style="padding-left: 30%;">
 </ul>
     <div class="container" >
         <%--标题--%>
@@ -236,10 +197,10 @@
             <%--信息--%>
         <div class="row">
             <div class="col-md-12">
-                <table class="table">
+                <table class="table table-hover">
                     <tr>
                         <td>
-                            全选  <input type="checkbox" id="delete-all-user" >
+                            全选 <input type="checkbox" id="delete-all-user" >
                         </td>
                         <th>用户名</th>
                         <th>昵称</th>
@@ -345,6 +306,24 @@
         </div>
     </div>
     <script type="text/javascript">
+        //验证用户名
+        $('#username').blur(function () {
+            var username = $('#username').val();
+            $('#username').parent().removeClass("has-error has-success");
+            $.ajax({
+                url:"queryUsername.controller?username="+username,
+                type:"get",
+                success:function (result) {
+                    if (result.code==200) {
+                        $('#username').parent().addClass("has-error");
+                        $('#username').next("span").html("用户名已被占用!");
+                    }
+                },
+                error:function () {
+                   alert("用户名验证错误!");
+                }
+            });
+        });
         //编辑用户
         $('.update_but').click(function () {
             var userid=$(this).attr("data_id");

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbuserMapper {
-
+    Tbuser queryUserByUserName(Tbuser tbuser);
     List<Tbuser> queryAllTbuser(@Param("page")PageResult pageResult,@Param("tbuser") Tbuser tbuser);
     int queryCountUser(Tbuser tbuser);
     Tbuser login(Tbuser tbuser);

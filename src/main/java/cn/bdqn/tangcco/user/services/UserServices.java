@@ -16,6 +16,6 @@ public interface UserServices {
     void deleteUser(int userid);
     void deleteByUserIds(List<Integer> list);
     Tbuser queryTbuserById(Integer userid);
-
+    int queryTbuserByUserName(Tbuser tbuser);
     int updateTbuserById(Tbuser tbuser);
 }

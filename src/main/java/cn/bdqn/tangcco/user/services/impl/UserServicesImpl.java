@@ -18,7 +18,6 @@ import java.util.List;
 public class UserServicesImpl implements UserServices {
     @Inject
     private TbuserMapper tbuserMapper;
-
     @Override
     public void deleteByUserIds(List<Integer> list) {
         //创建条件对象
@@ -28,7 +27,14 @@ public class UserServicesImpl implements UserServices {
         criteria.andUseridIn(list);
         tbuserMapper.deleteByExample(example);
     }
-
+    @Override
+    public int queryTbuserByUserName(Tbuser tbuser) {
+        TbuserExample example = new TbuserExample();
+        TbuserExample.Criteria criteria = example.createCriteria();
+        criteria.andUsernameEqualTo(tbuser.getUsername());
+        int count=tbuserMapper.selectByExample(example).size();
+        return count;
+    }
     @Override
     public Tbuser queryTbuserById(Integer userid) {
         return tbuserMapper.selectByPrimaryKey(userid);

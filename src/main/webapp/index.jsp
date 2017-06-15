@@ -1,27 +1,18 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2017/6/13
+  Time: 8:36
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page pageEncoding="utf-8"  contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-
 		<title>My JSP 'index.jsp' starting page</title>
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
-		
-		<link rel="stylesheet" type="text/css" href="<%=path %>/css/styles.css">
-		<script type="text/javascript" src="<%=path %>/js/jquery-1.5.2.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/login.js"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.5.2.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
 		<script type="text/javascript">
 			function login(){
 				var msg = "${msg}";
@@ -35,12 +26,12 @@
 
 	<body onload="login();">
 		<div class="leftcurtain">
-			<img src="<%=path %>/images/frontcurtainB.jpg" />
+			<img src="${pageContext.request.contextPath}/images/frontcurtainB.jpg" />
 		</div>
 		<div class="rightcurtain">
-			<img src="<%=path %>/images/frontcurtainB.jpg" />
+			<img src="${pageContext.request.contextPath}/images/frontcurtainB.jpg" />
 		</div>
-		<a class="rope" href="#"> <img src="<%=path %>/images/rope.png" /> </a>
+		<a class="rope" href="#"> <img src="${pageContext.request.contextPath}/images/rope.png" /> </a>
 		<div class="logo">
 			<div id="formwrapper">
 				<h3>

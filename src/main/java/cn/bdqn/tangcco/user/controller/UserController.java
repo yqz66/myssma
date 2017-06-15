@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
@@ -25,7 +24,7 @@ import java.util.List;
  */
 @Controller
 public class UserController {
-    @Resource
+    @Inject
     private UserServices userServices;
     @Inject
     private PageResult pageResult;
@@ -132,5 +131,14 @@ public class UserController {
             return Msg.success(null);
         }
         return Msg.error(null);
+    }
+    @ResponseBody
+    @RequestMapping(value = "queryUsername.controller",method = RequestMethod.GET)
+    public Msg queryUserByUsername(Tbuser tbuser){
+            int i = userServices.queryTbuserByUserName(tbuser);
+            if (i>0) {
+                return Msg.error(null);
+            }
+            return Msg.success(null);
     }
 }

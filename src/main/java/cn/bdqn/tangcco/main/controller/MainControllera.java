@@ -18,7 +18,6 @@ public class MainControllera {
     public String left(){
         return "/main/left";
     }
-
     @RequestMapping(value = "/right.controller", method = RequestMethod.GET)
     public String right() {
         return "/main/right";

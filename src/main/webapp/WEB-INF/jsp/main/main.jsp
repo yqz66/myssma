@@ -1,22 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-
 		<title>My JSP 'main.jsp' starting page</title>
-
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
-		<link rel="stylesheet" type="text/css" href="<%=path%>/css/leftstyles.css" />
 		<script type="text/javascript">
             window.onload=function(){
                 setInterval(go, 1000);
@@ -33,16 +18,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</script>
 		<style type="text/css">
 			span{
-				color: #8c8c8c;
-				font-size: 20px;
-				position: absolute;
-				top:60%;
+				color: #2b542c;
+				font-size: 30px;
+				position:absolute;
+				top:55%;
 				right:45%;
 			}
 		</style>
 	</head>
 	<body>
-	<<img src="<%=path%>/images/hello.jpg" alt="欢迎您${user.nickname}" width="100%" height="100%">
+	<<img src="${pageContext.request.contextPath}/images/hello.jpg" alt="欢迎您${user.nickname}" width="100%" height="100%">
 	<span id="sp"></span>
 	</body>
 </html>

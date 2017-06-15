@@ -5,6 +5,7 @@ import cn.bdqn.tangcco.entity.Msg;
 import cn.bdqn.tangcco.entity.PageResult;
 import cn.bdqn.tangcco.entity.Roles;
 import cn.bdqn.tangcco.entity.Tbuser;
+import cn.bdqn.tangcco.user.controller.UserController;
 import cn.bdqn.tangcco.user.services.UserServices;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -77,5 +78,12 @@ public class TestUser {
         tbuser.setUserid(36);
         tbuser.setUsername("确定修改成功");
         System.out.println(userServices.updateTbuserById(tbuser));
+    }
+    @Test
+    public void testQueryUsername(){
+        Tbuser tbuser = new Tbuser();
+        tbuser.setUsername("test12");
+        UserController controller = new UserController();
+        System.out.println(controller.queryUserByUsername(tbuser));
     }
 }
