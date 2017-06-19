@@ -70,6 +70,39 @@
   <sql id="Base_Column_List">
     stuid, gradeid, stuname, stunum, age, gender
   </sql>
+  <resultMap id="StudentNameAndGradeName" type="cn.bdqn.tangcco.entity.Student" autoMapping="true">
+    <id property="stuid" column="stuid"></id>
+    <association property="grade" javaType="cn.bdqn.tangcco.entity.Grade">
+        <result column="gradename" property="gradename"></result>
+    </association>
+  </resultMap>
+  <select id="queryAllStudent" resultMap="StudentNameAndGradeName">
+    select s.*,g.gradename from student s,grade g where g.gradeid=s.gradeid
+    <if test="student!=null">
+      <if test="student.stuname!=null and student.stuname!=''">
+        and s.stuname LIKE concat('%',#{student.stuname},'%')
+      </if>
+      <if test="student.gradeid!=null and student.gradeid!=0">
+        and s.gradeid=#{student.gradeid}
+      </if>
+    </if>
+    order by s.stuid
+    <if test="page!=null">
+      LIMIT #{page.pageNumber},#{page.pageSize}
+    </if>
+
+  </select>
+  <select id="queryCountStudent" resultType="int">
+    SELECT count(*) from student  WHERE  1=1
+    <if test="student!=null">
+      <if test="student.stuname!=null and student.stuname!=''">
+       and stuname like concat('%',#{student.stuname},'%')
+      </if>
+      <if test="student.gradeid!=null and student.gradeid!=0">
+        and gradeid=#{student.gradeid}
+      </if>
+    </if>
+  </select>
   <select id="selectByExample" parameterType="cn.bdqn.tangcco.entity.StudentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

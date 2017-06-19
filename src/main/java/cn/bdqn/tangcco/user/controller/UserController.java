@@ -67,14 +67,8 @@ public class UserController {
         page = Util.getPageResult(page);
         List<Tbuser> list = userServices.queryAllTbuser(page, tbuser);
         page.setPageNumber(pageNumbe);
-        int[] arr = {pageNumbe - 2, pageNumbe - 1, pageNumbe, pageNumbe + 1, pageNumbe + 2};
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < 1 || arr[i] > page.getTotalPages()) {
-                arr[i] = 0;
-            }
-        }
         model.addAttribute("userlist", list);
-        model.addAttribute("arr", arr);
+        model.addAttribute("arr", Util.getPageArray(page));
         model.addAttribute("page", page);
         return "user/listUser";
     }
@@ -108,10 +102,8 @@ public class UserController {
             }
             //服务层有一个根据多个ID删除的方法
             userServices.deleteByUserIds(list);
-            System.out.println("进入删除多个");
         } else {
             userServices.deleteUser(Integer.parseInt(userids));
-            System.out.println("删除一个");
         }
         return Msg.success(null);
     }

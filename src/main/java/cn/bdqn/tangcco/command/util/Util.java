@@ -11,4 +11,13 @@ public class Util {
         pageResult.setTotalPages(pageResult.getTotalPosts()/pageResult.getPageSize()+(pageResult.getTotalPosts()%pageResult.getPageSize()>0?1:0));
         return pageResult;
     }
+    public static int[] getPageArray(PageResult page){
+        int[] arr = {page.getPageNumber() - 2, page.getPageNumber() - 1, page.getPageNumber(), page.getPageNumber() + 1, page.getPageNumber() + 2};
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 1 || arr[i] > page.getTotalPages()) {
+                arr[i] = 0;
+            }
+        }
+        return arr;
+    }
 }

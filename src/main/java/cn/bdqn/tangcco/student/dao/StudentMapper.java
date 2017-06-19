@@ -1,11 +1,16 @@
 package cn.bdqn.tangcco.student.dao;
 
+import cn.bdqn.tangcco.entity.PageResult;
 import cn.bdqn.tangcco.entity.Student;
 import cn.bdqn.tangcco.entity.StudentExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface StudentMapper {
+    int queryCountStudent(@Param("student") Student student);
+    List<Student> queryAllStudent(@Param("page")PageResult pageResult, @Param("student") Student student);
+
     long countByExample(StudentExample example);
 
     int deleteByExample(StudentExample example);

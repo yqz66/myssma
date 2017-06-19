@@ -13,6 +13,29 @@ public class Student {
 
     private String gender;
 
+    private Grade grade;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "stuid=" + stuid +
+                ", gradeid=" + gradeid +
+                ", stuname='" + stuname + '\'' +
+                ", stunum='" + stunum + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", grade=" + grade +
+                '}';
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
     public Integer getStuid() {
         return stuid;
     }

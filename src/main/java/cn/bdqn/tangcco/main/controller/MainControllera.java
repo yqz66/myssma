@@ -26,4 +26,8 @@ public class MainControllera {
     public String top(){
         return "/main/top";
     }
+    @RequestMapping(value = "/hello.controller",method = RequestMethod.GET)
+    public String hello(){
+        return "main/hello";
+    }
 }

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>My JSP 'main.jsp' starting page</title>
-		<script type="text/javascript">
+		<%--<script type="text/javascript">
             window.onload=function(){
                 setInterval(go, 1000);
             };
@@ -24,10 +24,21 @@
 				top:55%;
 				right:45%;
 			}
+		</style>--%>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
+		<style type="text/css">
+			.top{
+				background-color: #FAE8C8;
+			}
+
 		</style>
+
 	</head>
-	<body>
-	<<img src="${pageContext.request.contextPath}/images/hello.jpg" alt="欢迎您${user.nickname}" width="100%" height="100%">
-	<span id="sp"></span>
+	<frameset rows="8%,*" border="0" class="top">
+		<frame src="/top.controller" scrolling="no">
+		<frame src="/hello.controller" name="right">
+	</frameset>
+<%--	<<img src="${pageContext.request.contextPath}/images/hello.jpg" alt="欢迎您${user.nickname}" width="100%" height="100%">
+	<span id="sp"></span>--%>
 	</body>
 </html>

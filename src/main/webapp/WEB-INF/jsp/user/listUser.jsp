@@ -19,7 +19,7 @@
             type :"GET",
             success :function (result) {
                 $.each(result,function (index,itmes) {
-                    $('#titles').append("<li class='s'><a href='"+itmes.menus.url+"' target='_top'><h4>"+itmes.menus.menusname+"</h4></a></li>");
+                    $('#titles').append("<li class='s'><a href='"+itmes.menus.url+"' target='right'><h4>"+itmes.menus.menusname+"</h4></a></li>");
 //                    $('#titles').append("<li role='presentation' class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='"+itmes.menus.url+"?page.pageNumber=1' role='button' aria-haspopup='true' aria-expanded='false'><h4>"+itmes.menus.menusname+"</h2></a></li>");
                 });
                 $('#titles').append("<li role='presentation' class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'><h4>更多<span class ='caret'></span></h4></a><ul class='dropdown-menu'><li>重新登录</li></ul></li>");
@@ -347,7 +347,6 @@
                 var flag = jiaoyan('#up_username','#up_nickname','#up_dateofbirth');
                 var datas=$('#update_user_from').serialize();
                 datas = decodeURIComponent(datas,true);
-                alert(datas+"&userid="+userid);
                 $.ajax({
                     url:"/update.controller",
                     data:datas+"&userid="+userid,
